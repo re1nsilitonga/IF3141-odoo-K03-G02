@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hizwell_proyek_user,hizwell.proyek user,model_hizwell_proyek,group_hizwell_user,1,1,0,0
+access_hizwell_proyek_sales,hizwell.proyek sales,model_hizwell_proyek,group_staf_sales,1,1,1,0
+access_hizwell_proyek_du,hizwell.proyek direktur utama,model_hizwell_proyek,group_direktur_utama,1,1,1,1
+access_hizwell_pesanan_user,hizwell.pesanan user,model_hizwell_pesanan,group_hizwell_user,1,1,0,0
+access_hizwell_pesanan_admin,hizwell.pesanan admin,model_hizwell_pesanan,group_staf_administrasi,1,1,1,0
+access_hizwell_pesanan_du,hizwell.pesanan direktur utama,model_hizwell_pesanan,group_direktur_utama,1,1,1,1
+access_hizwell_hak_akses_user,hizwell.hak.akses user,model_hizwell_hak_akses,group_hizwell_user,1,0,0,0
+access_hizwell_hak_akses_du,hizwell.hak.akses direktur utama,model_hizwell_hak_akses,group_direktur_utama,1,1,1,1

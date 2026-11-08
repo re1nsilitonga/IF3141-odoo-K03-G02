@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hizwell_proyek_view_tree" model="ir.ui.view">
+        <field name="name">hizwell.proyek.tree</field>
+        <field name="model">hizwell.proyek</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="kode"/>
+                <field name="name"/>
+                <field name="pelanggan_id"/>
+                <field name="nomor_tender"/>
+                <field name="tanggal_tender"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hizwell_proyek_view_form" model="ir.ui.view">
+        <field name="name">hizwell.proyek.form</field>
+        <field name="model">hizwell.proyek</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="bisa_ubah" invisible="1"/>
+                <sheet>
+                    <div class="oe_button_box" name="button_box"/>
+                    <widget name="web_ribbon" title="Diarsipkan" bg_color="text-bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <field name="kode" class="text-muted"/>
+                        <h1><field name="name" placeholder="Nama proyek" readonly="id and not bisa_ubah"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="pelanggan_id" readonly="id and not bisa_ubah"/>
+                            <field name="nomor_tender" readonly="id and not bisa_ubah"/>
+                        </group>
+                        <group>
+                            <field name="tanggal_tender" readonly="id and not bisa_ubah"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Pesanan" name="pesanan">
+                            <field name="pesanan_ids" readonly="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="vendor_id"/>
+                                    <field name="tanggal_pesanan"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Hak Akses" name="hak_akses" groups="hizwell_base.group_direktur_utama">
+                            <field name="akses_ids">
+                                <tree editable="bottom">
+                                    <field name="user_id"/>
+                                    <field name="jabatan"/>
+                                    <field name="tingkat_akses"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="hizwell_proyek_view_search" model="ir.ui.view">
+        <field name="name">hizwell.proyek.search</field>
+        <field name="model">hizwell.proyek</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" filter_domain="['|', '|', ('name', 'ilike', self), ('kode', 'ilike', self), ('nomor_tender', 'ilike', self)]"/>
+                <field name="pelanggan_id"/>
+                <filter name="filter_arsip" string="Diarsipkan" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Kelompokkan">
+                    <filter name="group_pelanggan" string="Pelanggan" context="{'group_by': 'pelanggan_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="hizwell_proyek_action" model="ir.actions.act_window">
+        <field name="name">Proyek</field>
+        <field name="res_model">hizwell.proyek</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Buat proyek tender pertama</p>
+        </field>
+    </record>
+</odoo>

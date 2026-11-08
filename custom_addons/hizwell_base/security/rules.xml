@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Proyek -->
+    <record id="rule_proyek_baca" model="ir.rule">
+        <field name="name">Proyek: baca sesuai hak akses</field>
+        <field name="model_id" ref="model_hizwell_proyek"/>
+        <field name="domain_force">[('akses_ids', 'any', [('user_id', '=', user.id)])]</field>
+        <field name="groups" eval="[(4, ref('group_hizwell_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="rule_proyek_ubah" model="ir.rule">
+        <field name="name">Proyek: ubah jika akses Mengubah</field>
+        <field name="model_id" ref="model_hizwell_proyek"/>
+        <field name="domain_force">[('akses_ids', 'any', [('user_id', '=', user.id), ('tingkat_akses', '=', 'ubah')])]</field>
+        <field name="groups" eval="[(4, ref('group_hizwell_user'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+    <record id="rule_proyek_buat" model="ir.rule">
+        <field name="name">Proyek: buat</field>
+        <field name="model_id" ref="model_hizwell_proyek"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_hizwell_user'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="rule_proyek_du" model="ir.rule">
+        <field name="name">Proyek: Direktur Utama semua</field>
+        <field name="model_id" ref="model_hizwell_proyek"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_direktur_utama'))]"/>
+    </record>
+
+    <!-- Pesanan -->
+    <record id="rule_pesanan_baca" model="ir.rule">
+        <field name="name">Pesanan: baca sesuai hak akses</field>
+        <field name="model_id" ref="model_hizwell_pesanan"/>
+        <field name="domain_force">[('akses_ids', 'any', [('user_id', '=', user.id)])]</field>
+        <field name="groups" eval="[(4, ref('group_hizwell_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="rule_pesanan_ubah" model="ir.rule">
+        <field name="name">Pesanan: ubah jika akses Mengubah</field>
+        <field name="model_id" ref="model_hizwell_pesanan"/>
+        <field name="domain_force">[('akses_ids', 'any', [('user_id', '=', user.id), ('tingkat_akses', '=', 'ubah')])]</field>
+        <field name="groups" eval="[(4, ref('group_hizwell_user'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+    <record id="rule_pesanan_buat" model="ir.rule">
+        <field name="name">Pesanan: buat</field>
+        <field name="model_id" ref="model_hizwell_pesanan"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_hizwell_user'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="rule_pesanan_du" model="ir.rule">
+        <field name="name">Pesanan: Direktur Utama semua</field>
+        <field name="model_id" ref="model_hizwell_pesanan"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_direktur_utama'))]"/>
+    </record>
+
+    <!-- Baris hak akses: pengguna hanya melihat barisnya sendiri -->
+    <record id="rule_hak_akses_sendiri" model="ir.rule">
+        <field name="name">Hak akses: baris sendiri</field>
+        <field name="model_id" ref="model_hizwell_hak_akses"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_hizwell_user'))]"/>
+    </record>
+    <record id="rule_hak_akses_du" model="ir.rule">
+        <field name="name">Hak akses: Direktur Utama semua</field>
+        <field name="model_id" ref="model_hizwell_hak_akses"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_direktur_utama'))]"/>
+    </record>
+</odoo>

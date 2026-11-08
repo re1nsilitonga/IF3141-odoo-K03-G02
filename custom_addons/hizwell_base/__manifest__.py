@@ -1,0 +1,20 @@
+{
+    "name": "Hizwell Base",
+    "summary": "Fondasi sistem dokumen Hizwell: proyek, pesanan, jabatan, dan hak akses",
+    "version": "17.0.1.0.0",
+    "license": "LGPL-3",
+    "author": "IF3141 K03-G02",
+    "category": "Hizwell",
+    "depends": ["base", "mail", "contacts"],
+    "application": True,
+    "data": [
+        "security/security.xml",
+        "security/ir.model.access.csv",
+        "security/rules.xml",
+        "data/sequence_data.xml",
+        "views/hak_akses_views.xml",
+        "views/proyek_views.xml",
+        "views/pesanan_views.xml",
+        "views/menus.xml",
+    ],
+}
