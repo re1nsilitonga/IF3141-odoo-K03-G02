@@ -7,3 +7,4 @@ access_hizwell_pesanan_admin,hizwell.pesanan admin,model_hizwell_pesanan,group_s
 access_hizwell_pesanan_du,hizwell.pesanan direktur utama,model_hizwell_pesanan,group_direktur_utama,1,1,1,1
 access_hizwell_hak_akses_user,hizwell.hak.akses user,model_hizwell_hak_akses,group_hizwell_user,1,0,0,0
 access_hizwell_hak_akses_du,hizwell.hak.akses direktur utama,model_hizwell_hak_akses,group_direktur_utama,1,1,1,1
+access_hizwell_revisi_wizard_user,hizwell.revisi.wizard user,model_hizwell_revisi_wizard,group_hizwell_user,1,1,1,0
