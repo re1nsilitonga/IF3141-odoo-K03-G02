@@ -34,4 +34,21 @@
         <field name="res_model">hizwell.hak.akses</field>
         <field name="view_mode">tree</field>
     </record>
+    
+    <record id="hizwell_revisi_wizard_view_form" model="ir.ui.view">
+        <field name="name">hizwell.revisi.wizard.form</field>
+        <field name="model">hizwell.revisi.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Buat Revisi">
+                <p>Versi sekarang akan dipindahkan ke Arsip Revisi, lalu dibuat versi baru dengan nomor revisi berikutnya.</p>
+                <group>
+                    <field name="alasan" placeholder="Contoh: harga barang berubah sesuai klarifikasi pelanggan"/>
+                </group>
+                <footer>
+                    <button name="action_buat" type="object" string="Buat Revisi" class="btn-primary"/>
+                    <button string="Batal" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
 </odoo>
