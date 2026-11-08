@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_hizwell" model="ir.module.category">
+        <field name="name">Hizwell</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="group_hizwell_user" model="res.groups">
+        <field name="name">Pengguna Hizwell</field>
+        <field name="category_id" ref="module_category_hizwell"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_staf_sales" model="res.groups">
+        <field name="name">Staf Sales dan Marketing</field>
+        <field name="category_id" ref="module_category_hizwell"/>
+        <field name="implied_ids" eval="[(4, ref('group_hizwell_user'))]"/>
+    </record>
+
+    <record id="group_staf_administrasi" model="res.groups">
+        <field name="name">Staf Administrasi</field>
+        <field name="category_id" ref="module_category_hizwell"/>
+        <field name="implied_ids" eval="[(4, ref('group_hizwell_user'))]"/>
+    </record>
+
+    <record id="group_direktur_wilayah" model="res.groups">
+        <field name="name">Direktur Wilayah</field>
+        <field name="category_id" ref="module_category_hizwell"/>
+        <field name="implied_ids" eval="[(4, ref('group_hizwell_user'))]"/>
+    </record>
+
+    <record id="group_direktur_utama" model="res.groups">
+        <field name="name">Direktur Utama</field>
+        <field name="category_id" ref="module_category_hizwell"/>
+        <field name="implied_ids" eval="[(4, ref('group_hizwell_user'))]"/>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+    </record>
+</odoo>

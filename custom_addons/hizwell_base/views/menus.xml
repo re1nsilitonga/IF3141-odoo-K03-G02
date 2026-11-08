@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_hizwell_root" name="Dokumen Hizwell"
+              groups="group_hizwell_user" sequence="10"/>
+
+    <menuitem id="menu_hizwell_dokumen" name="Proyek dan Pesanan"
+              parent="menu_hizwell_root" sequence="10"/>
+    <menuitem id="menu_hizwell_proyek" name="Proyek" parent="menu_hizwell_dokumen"
+              action="hizwell_proyek_action" sequence="10"/>
+    <menuitem id="menu_hizwell_pesanan" name="Pesanan" parent="menu_hizwell_dokumen"
+              action="hizwell_pesanan_action" sequence="20"/>
+
+    <menuitem id="menu_hizwell_konfigurasi" name="Konfigurasi"
+              parent="menu_hizwell_root" groups="group_direktur_utama" sequence="90"/>
+    <menuitem id="menu_hizwell_kontak" name="Pelanggan dan Vendor"
+              parent="menu_hizwell_konfigurasi" action="contacts.action_contacts" sequence="20"/>
+    <menuitem id="menu_hizwell_hak_akses" name="Hak Akses Dokumen"
+              parent="menu_hizwell_konfigurasi" action="hizwell_hak_akses_action" sequence="10"/>
+</odoo>

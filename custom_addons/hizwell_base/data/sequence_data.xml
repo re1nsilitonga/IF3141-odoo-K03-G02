@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="seq_hizwell_proyek" model="ir.sequence">
+        <field name="name">Proyek Hizwell</field>
+        <field name="code">hizwell.proyek</field>
+        <field name="prefix">PRJ/%(year)s/</field>
+        <field name="padding">4</field>
+    </record>
+    <record id="seq_hizwell_pesanan" model="ir.sequence">
+        <field name="name">Pesanan Hizwell</field>
+        <field name="code">hizwell.pesanan</field>
+        <field name="prefix">PSN/%(year)s/</field>
+        <field name="padding">4</field>
+    </record>
+</odoo>
