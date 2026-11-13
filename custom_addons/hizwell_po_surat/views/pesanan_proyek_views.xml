@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Stat button PO pada form pesanan -->
+    <record id="hizwell_pesanan_view_form_po" model="ir.ui.view">
+        <field name="name">hizwell.pesanan.form.po</field>
+        <field name="model">hizwell.pesanan</field>
+        <field name="inherit_id" ref="hizwell_base.hizwell_pesanan_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_lihat_po" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field name="po_count" widget="statinfo" string="PO"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Stat button Surat pada form proyek -->
+    <record id="hizwell_proyek_view_form_surat" model="ir.ui.view">
+        <field name="name">hizwell.proyek.form.surat</field>
+        <field name="model">hizwell.proyek</field>
+        <field name="inherit_id" ref="hizwell_base.hizwell_proyek_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_lihat_surat" type="object" class="oe_stat_button" icon="fa-envelope-o">
+                    <field name="surat_count" widget="statinfo" string="Surat"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

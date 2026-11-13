@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hizwell_surat_view_tree" model="ir.ui.view">
+        <field name="name">hizwell.surat.tree</field>
+        <field name="model">hizwell.surat</field>
+        <field name="arch" type="xml">
+            <tree decoration-muted="state == 'arsip'" decoration-danger="state == 'gagal'" decoration-success="state == 'terbit'">
+                <field name="nomor_dokumen" string="Nomor Surat"/>
+                <field name="kode_revisi"/>
+                <field name="tanggal_surat"/>
+                <field name="proyek_id"/>
+                <field name="penerima_id"/>
+                <field name="perihal"/>
+                <field name="state" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hizwell_surat_view_form" model="ir.ui.view">
+        <field name="name">hizwell.surat.form</field>
+        <field name="model">hizwell.surat</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_terbitkan" type="object" string="Terbitkan" class="btn-primary"
+                            invisible="state != 'draft'"
+                            groups="hizwell_base.group_staf_administrasi,hizwell_base.group_direktur_utama"/>
+                    <button name="action_ulangi" type="object" string="Ulangi" class="btn-primary"
+                            invisible="state != 'gagal'"
+                            groups="hizwell_base.group_staf_administrasi,hizwell_base.group_direktur_utama"/>
+                    <button name="action_buka_wizard_revisi" type="object" string="Buat Revisi"
+                            invisible="state != 'terbit'"
+                            groups="hizwell_base.group_staf_administrasi,hizwell_base.group_direktur_utama"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,terbit,arsip"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_unduh_pdf" type="object" class="oe_stat_button" icon="fa-file-pdf-o"
+                                invisible="not pdf_id">
+                            <div class="o_stat_info"><span class="o_stat_text">Unduh PDF</span></div>
+                        </button>
+                    </div>
+                    <div class="alert alert-danger" role="alert" invisible="state != 'gagal'">
+                        <strong>Pembuatan dokumen gagal.</strong>
+                        <field name="pesan_galat" readonly="1"/>
+                        Data isian tetap tersimpan. Perbaiki data bila perlu, lalu klik Ulangi dan Terbitkan.
+                    </div>
+                    <div class="oe_title">
+                        <label for="nomor_dokumen" string="Nomor Surat"/>
+                        <h1>
+                            <field name="nomor_dokumen" class="d-inline" readonly="state in ('terbit', 'arsip')"/>
+                            <field name="kode_revisi" class="text-muted ms-2"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="proyek_id" readonly="state in ('terbit', 'arsip')"/>
+                            <field name="tanggal_surat" readonly="state in ('terbit', 'arsip')"/>
+                            <field name="perihal" readonly="state in ('terbit', 'arsip')"/>
+                        </group>
+                        <group>
+                            <field name="penerima_id" readonly="state in ('terbit', 'arsip')"/>
+                            <field name="alamat_penerima" readonly="state in ('terbit', 'arsip')"/>
+                            <field name="alasan_revisi" invisible="not no_revisi"/>
+                            <field name="no_revisi" invisible="1"/>
+                            <field name="pdf_id" invisible="1"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Isi Surat" name="isi">
+                            <field name="isi" readonly="state in ('terbit', 'arsip')"/>
+                        </page>
+                        <page string="Riwayat Revisi" name="riwayat">
+                            <field name="riwayat_ids" readonly="1">
+                                <tree decoration-muted="state == 'arsip'">
+                                    <field name="nomor_dokumen" string="Nomor Surat"/>
+                                    <field name="kode_revisi"/>
+                                    <field name="alasan_revisi"/>
+                                    <field name="tanggal_terbit"/>
+                                    <field name="state" widget="badge"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="hizwell_surat_view_search" model="ir.ui.view">
+        <field name="name">hizwell.surat.search</field>
+        <field name="model">hizwell.surat</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="nomor_dokumen" string="Nomor Surat"/>
+                <field name="perihal"/>
+                <field name="proyek_id"/>
+                <field name="penerima_id"/>
+                <filter name="filter_berlaku" string="Berlaku" domain="[('state', '!=', 'arsip')]"/>
+                <filter name="filter_arsip_revisi" string="Arsip Revisi" domain="[('state', '=', 'arsip')]"/>
+                <filter name="filter_gagal" string="Gagal Dibuat" domain="[('state', '=', 'gagal')]"/>
+                <group expand="0" string="Kelompokkan">
+                    <filter name="group_proyek" string="Proyek" context="{'group_by': 'proyek_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="hizwell_surat_action" model="ir.actions.act_window">
+        <field name="name">Surat</field>
+        <field name="res_model">hizwell.surat</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_filter_berlaku': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Buat surat pertama</p>
+        </field>
+    </record>
+</odoo>
