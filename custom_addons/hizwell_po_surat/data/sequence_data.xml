@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="seq_hizwell_po" model="ir.sequence">
+        <field name="name">PO Hizwell</field>
+        <field name="code">hizwell.po</field>
+        <field name="prefix">PO/%(year)s/</field>
+        <field name="padding">4</field>
+    </record>
+    <record id="seq_hizwell_surat" model="ir.sequence">
+        <field name="name">Surat Hizwell</field>
+        <field name="code">hizwell.surat</field>
+        <field name="prefix">SRT/%(year)s/</field>
+        <field name="padding">4</field>
+    </record>
+</odoo>

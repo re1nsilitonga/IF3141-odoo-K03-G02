@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hizwell_po_user,hizwell.po user,model_hizwell_po,hizwell_base.group_hizwell_user,1,0,0,0
+access_hizwell_po_du,hizwell.po direktur utama,model_hizwell_po,hizwell_base.group_direktur_utama,1,1,1,1
+access_hizwell_po_baris_user,hizwell.po.baris user,model_hizwell_po_baris,hizwell_base.group_hizwell_user,1,0,0,0
+access_hizwell_po_baris_du,hizwell.po.baris direktur utama,model_hizwell_po_baris,hizwell_base.group_direktur_utama,1,1,1,1
+access_hizwell_surat_user,hizwell.surat user,model_hizwell_surat,hizwell_base.group_hizwell_user,1,0,0,0
+access_hizwell_surat_admin,hizwell.surat staf administrasi,model_hizwell_surat,hizwell_base.group_staf_administrasi,1,1,1,0
+access_hizwell_surat_du,hizwell.surat direktur utama,model_hizwell_surat,hizwell_base.group_direktur_utama,1,1,1,1

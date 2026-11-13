@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_surat" model="ir.actions.report">
+        <field name="name">Surat</field>
+        <field name="model">hizwell.surat</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hizwell_po_surat.report_surat_dokumen</field>
+        <field name="report_file">hizwell_po_surat.report_surat_dokumen</field>
+        <field name="print_report_name">'Surat %s' % object.display_name</field>
+    </record>
+
+    <template id="report_surat_dokumen">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="text-end"><span t-field="doc.tanggal_surat"/></div>
+                        <table class="table table-sm table-borderless w-50 mt-3">
+                            <tr><td>Nomor</td><td>: <span t-out="doc.nomor_dokumen"/><t t-if="doc.no_revisi"> (<t t-out="doc.kode_revisi"/>)</t></td></tr>
+                            <tr><td>Perihal</td><td>: <span t-out="doc.perihal"/></td></tr>
+                        </table>
+
+                        <div class="mt-4">
+                            Kepada Yth.<br/>
+                            <strong><span t-field="doc.penerima_id.name"/></strong><br/>
+                            <div style="white-space: pre-line;" t-out="doc.alamat_penerima"/>
+                        </div>
+
+                        <div class="mt-4" t-field="doc.isi"/>
+
+                        <div class="mt-5">
+                            <p>Hormat kami,</p>
+                            <br/><br/><br/>
+                            <p><strong><span t-out="doc.company_id.name"/></strong></p>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_hizwell_po_surat" name="PO dan Surat"
+              parent="hizwell_base.menu_hizwell_root" sequence="30"/>
+    <menuitem id="menu_hizwell_po" name="Purchase Order" parent="menu_hizwell_po_surat"
+              action="hizwell_po_action" sequence="10"/>
+    <menuitem id="menu_hizwell_surat" name="Surat" parent="menu_hizwell_po_surat"
+              action="hizwell_surat_action" sequence="20"/>
+</odoo>

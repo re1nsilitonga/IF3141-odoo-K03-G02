@@ -1,0 +1,20 @@
+{
+    "name": "Hizwell PO dan Surat",
+    "summary": "Dokumen PO (FR-04) dan surat (FR-05) dari templat baku, lengkap dengan PDF dan revisi",
+    "version": "17.0.1.0.0",
+    "license": "LGPL-3",
+    "author": "IF3141 K03-G02",
+    "category": "Hizwell",
+    "depends": ["hizwell_base"],
+    "data": [
+        "security/ir.model.access.csv",
+        "security/rules.xml",
+        "data/sequence_data.xml",
+        "report/po_report.xml",
+        "report/surat_report.xml",
+        "views/po_views.xml",
+        "views/surat_views.xml",
+        "views/pesanan_proyek_views.xml",
+        "views/menus.xml",
+    ],
+}
