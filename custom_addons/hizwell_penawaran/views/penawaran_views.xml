@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hizwell_penawaran_view_tree" model="ir.ui.view">
+        <field name="name">hizwell.penawaran.tree</field>
+        <field name="model">hizwell.penawaran</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="state == 'terbit'" decoration-danger="state == 'gagal'" decoration-muted="state == 'arsip'">
+                <field name="nomor_dokumen"/>
+                <field name="kode_revisi"/>
+                <field name="proyek_id"/>
+                <field name="pelanggan_id"/>
+                <field name="tanggal_penawaran"/>
+                <field name="total_harga"/>
+                <field name="state" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hizwell_penawaran_view_form" model="ir.ui.view">
+        <field name="name">hizwell.penawaran.form</field>
+        <field name="model">hizwell.penawaran</field>
+        <field name="arch" type="xml">
+            <form duplicate="false">
+                <header>
+                    <button name="action_terbitkan" type="object" string="Terbitkan" class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="action_ulangi" type="object" string="Ulangi" class="btn-primary"
+                            invisible="state != 'gagal'"/>
+                    <button name="action_unduh_pdf" type="object" string="Unduh PDF"
+                            invisible="state not in ('terbit', 'arsip') or not lampiran_id"/>
+                    <button name="action_setujui_revisi" type="object" string="Setujui Revisi" class="btn-primary"
+                            invisible="state != 'terbit' or not perlu_persetujuan_revisi or disetujui_revisi_oleh"
+                            groups="hizwell_base.group_direktur_wilayah"/>
+                    <button name="action_tandai_terkirim" type="object" string="Tandai Sudah Dikirim"
+                            invisible="state != 'terbit' or tanggal_kirim"/>
+                    <button name="action_buka_wizard_revisi" type="object" string="Buat Revisi"
+                            invisible="state != 'terbit'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,terbit,arsip"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="nomor_dokumen" readonly="1"/>
+                            <field name="kode_revisi" class="text-muted ms-2"/>
+                        </h1>
+                    </div>
+                    <div class="alert alert-danger" role="alert" invisible="state != 'gagal'">
+                        <strong>Pembuatan dokumen gagal:</strong> <field name="pesan_galat" nolabel="1"/>
+                        Perbaiki data isian, lalu klik Ulangi.
+                    </div>
+                    <div class="alert alert-warning" role="alert"
+                         invisible="not perlu_persetujuan_revisi or disetujui_revisi_oleh or state != 'terbit'">
+                        Revisi ini atas penawaran yang sudah dikirim. Kirim ke pelanggan hanya setelah disetujui Direktur Wilayah.
+                    </div>
+                    <group>
+                        <group>
+                            <field name="proyek_id" readonly="state != 'draft'"/>
+                            <field name="pelanggan_id"/>
+                            <field name="nomor_tender"/>
+                            <field name="tanggal_tender"/>
+                        </group>
+                        <group>
+                            <field name="templat_id" readonly="state != 'draft'" options="{'no_create': True}"/>
+                            <field name="tanggal_penawaran" readonly="state != 'draft'"/>
+                            <field name="alasan_revisi" invisible="not no_revisi"/>
+                            <field name="no_revisi" invisible="1"/>
+                            <field name="lampiran_id" invisible="not lampiran_id"/>
+                            <field name="perlu_persetujuan_revisi" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Daftar Barang" name="barang">
+                            <field name="line_ids" readonly="state != 'draft'">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="nama_barang"/>
+                                    <field name="part_number"/>
+                                    <field name="jumlah"/>
+                                    <field name="harga_satuan"/>
+                                    <field name="subtotal"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer">
+                                <field name="total_harga"/>
+                            </group>
+                        </page>
+                        <page string="Pengiriman" name="pengiriman">
+                            <group>
+                                <field name="tanggal_terbit"/>
+                                <field name="tanggal_kirim"/>
+                                <field name="disetujui_revisi_oleh" invisible="not perlu_persetujuan_revisi"/>
+                                <field name="tanggal_persetujuan_revisi" invisible="not perlu_persetujuan_revisi"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="hizwell_penawaran_view_search" model="ir.ui.view">
+        <field name="name">hizwell.penawaran.search</field>
+        <field name="model">hizwell.penawaran</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="nomor_dokumen"/>
+                <field name="proyek_id"/>
+                <field name="pelanggan_id"/>
+                <filter name="filter_aktif" string="Tanpa Arsip Revisi" domain="[('state', '!=', 'arsip')]"/>
+                <filter name="filter_draft" string="Data Isian Tersimpan" domain="[('state', '=', 'draft')]"/>
+                <filter name="filter_gagal" string="Gagal Dibuat" domain="[('state', '=', 'gagal')]"/>
+                <filter name="filter_terbit" string="Terbit" domain="[('state', '=', 'terbit')]"/>
+                <filter name="filter_arsip" string="Arsip Revisi" domain="[('state', '=', 'arsip')]"/>
+                <group expand="0" string="Kelompokkan">
+                    <filter name="group_proyek" string="Proyek" context="{'group_by': 'proyek_id'}"/>
+                    <filter name="group_pelanggan" string="Pelanggan" context="{'group_by': 'pelanggan_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="hizwell_penawaran_action" model="ir.actions.act_window">
+        <field name="name">Penawaran</field>
+        <field name="res_model">hizwell.penawaran</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_filter_aktif': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Buat penawaran pertama</p>
+        </field>
+    </record>
+</odoo>

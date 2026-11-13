@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hizwell_templat_penawaran_user,hizwell.templat.penawaran user,model_hizwell_templat_penawaran,hizwell_base.group_hizwell_user,1,0,0,0
+access_hizwell_templat_penawaran_admin,hizwell.templat.penawaran administrasi,model_hizwell_templat_penawaran,hizwell_base.group_staf_administrasi,1,1,1,0
+access_hizwell_templat_penawaran_dirwil,hizwell.templat.penawaran direktur wilayah,model_hizwell_templat_penawaran,hizwell_base.group_direktur_wilayah,1,1,0,0
+access_hizwell_templat_penawaran_du,hizwell.templat.penawaran direktur utama,model_hizwell_templat_penawaran,hizwell_base.group_direktur_utama,1,1,1,1
+access_hizwell_penawaran_user,hizwell.penawaran user,model_hizwell_penawaran,hizwell_base.group_hizwell_user,1,0,0,0
+access_hizwell_penawaran_sales,hizwell.penawaran sales,model_hizwell_penawaran,hizwell_base.group_staf_sales,1,1,1,0
+access_hizwell_penawaran_du,hizwell.penawaran direktur utama,model_hizwell_penawaran,hizwell_base.group_direktur_utama,1,1,1,1
+access_hizwell_penawaran_baris_user,hizwell.penawaran.baris user,model_hizwell_penawaran_baris,hizwell_base.group_hizwell_user,1,0,0,0
+access_hizwell_penawaran_baris_sales,hizwell.penawaran.baris sales,model_hizwell_penawaran_baris,hizwell_base.group_staf_sales,1,1,1,1
+access_hizwell_penawaran_baris_du,hizwell.penawaran.baris direktur utama,model_hizwell_penawaran_baris,hizwell_base.group_direktur_utama,1,1,1,1

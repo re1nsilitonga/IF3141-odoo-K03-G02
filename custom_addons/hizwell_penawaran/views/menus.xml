@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_hizwell_penawaran_root" name="Penawaran Tender"
+              parent="hizwell_base.menu_hizwell_root" sequence="20"/>
+    <menuitem id="menu_hizwell_penawaran" name="Penawaran" parent="menu_hizwell_penawaran_root"
+              action="hizwell_penawaran_action" sequence="10"/>
+    <menuitem id="menu_hizwell_templat_penawaran" name="Templat Penawaran" parent="menu_hizwell_penawaran_root"
+              action="hizwell_templat_penawaran_action" sequence="20"/>
+</odoo>

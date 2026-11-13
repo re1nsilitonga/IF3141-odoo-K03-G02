@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hizwell_templat_penawaran_view_tree" model="ir.ui.view">
+        <field name="name">hizwell.templat.penawaran.tree</field>
+        <field name="model">hizwell.templat.penawaran</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="state == 'disetujui'" decoration-warning="state == 'diajukan'" decoration-danger="state == 'revisi'">
+                <field name="name"/>
+                <field name="state" widget="badge"/>
+                <field name="disetujui_oleh"/>
+                <field name="tanggal_persetujuan"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hizwell_templat_penawaran_view_form" model="ir.ui.view">
+        <field name="name">hizwell.templat.penawaran.form</field>
+        <field name="model">hizwell.templat.penawaran</field>
+        <field name="arch" type="xml">
+            <form duplicate="false">
+                <header>
+                    <button name="action_ajukan" type="object" string="Ajukan ke Direktur Wilayah" class="btn-primary"
+                            invisible="state not in ('draft', 'revisi')"/>
+                    <button name="action_setujui" type="object" string="Setujui" class="btn-primary"
+                            invisible="state != 'diajukan'" groups="hizwell_base.group_direktur_wilayah"/>
+                    <button name="action_minta_revisi" type="object" string="Minta Revisi"
+                            invisible="state != 'diajukan'" groups="hizwell_base.group_direktur_wilayah"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,diajukan,disetujui"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Diarsipkan" bg_color="text-bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Nama templat"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="nama_penandatangan"/>
+                            <field name="jabatan_penandatangan"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="disetujui_oleh"/>
+                            <field name="tanggal_persetujuan"/>
+                            <field name="catatan_persetujuan" readonly="state != 'diajukan'"/>
+                        </group>
+                    </group>
+                    <group string="Isi Templat">
+                        <field name="kop"/>
+                        <field name="kalimat_pembuka"/>
+                        <field name="ketentuan"/>
+                        <field name="kalimat_penutup"/>
+                    </group>
+                    <div class="text-muted">
+                        Penanda isian yang tersedia: [[nama_pelanggan]], [[nama_proyek]], [[nomor_tender]],
+                        [[tanggal_tender]], [[nomor_penawaran]], [[total_harga]].
+                    </div>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="hizwell_templat_penawaran_view_search" model="ir.ui.view">
+        <field name="name">hizwell.templat.penawaran.search</field>
+        <field name="model">hizwell.templat.penawaran</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <filter name="filter_disetujui" string="Disetujui" domain="[('state', '=', 'disetujui')]"/>
+                <filter name="filter_diajukan" string="Menunggu Persetujuan" domain="[('state', '=', 'diajukan')]"/>
+                <filter name="filter_arsip" string="Diarsipkan" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="hizwell_templat_penawaran_action" model="ir.actions.act_window">
+        <field name="name">Templat Penawaran</field>
+        <field name="res_model">hizwell.templat.penawaran</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

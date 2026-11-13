@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Templat awal berstatus Rancangan: harus diajukan dan disetujui Direktur Wilayah dulu (OW-06).
+         Isi ketentuan hanya contoh, sesuaikan dengan format tender pelanggan. -->
+    <record id="templat_penawaran_standar" model="hizwell.templat.penawaran">
+        <field name="name">Templat Penawaran Standar</field>
+        <field name="kop">PT HIZWELL SEJAHTERA INDONESIA</field>
+        <field name="kalimat_pembuka">Dengan hormat,
+Menindaklanjuti tender nomor [[nomor_tender]] tanggal [[tanggal_tender]] ([[nama_proyek]]), bersama ini kami sampaikan penawaran harga kepada [[nama_pelanggan]] sebagai berikut.</field>
+        <field name="ketentuan">Ketentuan penawaran (contoh, sesuaikan dengan persyaratan tender):
+1. Harga dalam Rupiah.
+2. Total penawaran: [[total_harga]].</field>
+        <field name="kalimat_penutup">Demikian penawaran ini kami sampaikan. Atas perhatian dan kerja sama Bapak/Ibu, kami ucapkan terima kasih.</field>
+        <field name="nama_penandatangan">...</field>
+        <field name="jabatan_penandatangan">Direktur</field>
+    </record>
+</odoo>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_penawaran" model="ir.actions.report">
+        <field name="name">Dokumen Penawaran</field>
+        <field name="model">hizwell.penawaran</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hizwell_penawaran.report_penawaran_document</field>
+        <field name="report_file">hizwell_penawaran.report_penawaran_document</field>
+        <field name="print_report_name">'Penawaran-%s' % (object.display_name or '').replace('/', '-')</field>
+    </record>
+
+    <template id="report_penawaran_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div style="white-space: pre-line; font-weight: bold;">
+                            <t t-out="o.render_penanda(o.templat_id.kop)"/>
+                        </div>
+                        <div class="mt-3">
+                            <div>Nomor: <t t-out="o.display_name"/></div>
+                            <div>Tanggal: <t t-out="o.tanggal_penawaran" t-options='{"widget": "date"}'/></div>
+                            <div>Kepada: <t t-out="o.pelanggan_id.name"/></div>
+                        </div>
+                        <div class="mt-3" style="white-space: pre-line;">
+                            <t t-out="o.render_penanda(o.templat_id.kalimat_pembuka)"/>
+                        </div>
+                        <table class="table table-sm mt-3">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Barang</th>
+                                    <th>Part Number</th>
+                                    <th class="text-end">Jumlah</th>
+                                    <th class="text-end">Harga Satuan (Rp)</th>
+                                    <th class="text-end">Subtotal (Rp)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.line_ids" t-as="l">
+                                    <tr>
+                                        <td><t t-out="l_index + 1"/></td>
+                                        <td><t t-out="l.nama_barang"/></td>
+                                        <td><t t-out="l.part_number"/></td>
+                                        <td class="text-end"><t t-out="l.jumlah" t-options='{"widget": "float", "precision": 2}'/></td>
+                                        <td class="text-end"><t t-out="l.harga_satuan" t-options='{"widget": "float", "precision": 2}'/></td>
+                                        <td class="text-end"><t t-out="l.subtotal" t-options='{"widget": "float", "precision": 2}'/></td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td colspan="5" class="text-end"><strong>Total</strong></td>
+                                    <td class="text-end"><strong><t t-out="o.total_harga" t-options='{"widget": "float", "precision": 2}'/></strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div t-if="o.templat_id.ketentuan" style="white-space: pre-line;">
+                            <t t-out="o.render_penanda(o.templat_id.ketentuan)"/>
+                        </div>
+                        <div class="mt-3" t-if="o.templat_id.kalimat_penutup" style="white-space: pre-line;">
+                            <t t-out="o.render_penanda(o.templat_id.kalimat_penutup)"/>
+                        </div>
+                        <div class="mt-5">
+                            <div t-out="o.templat_id.jabatan_penandatangan"/>
+                            <br/><br/><br/>
+                            <div t-out="o.templat_id.nama_penandatangan"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

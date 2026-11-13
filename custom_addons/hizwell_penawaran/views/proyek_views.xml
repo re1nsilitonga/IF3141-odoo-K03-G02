@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Stat button penawaran pada form proyek (div button_box dari hizwell_base) -->
+    <record id="hizwell_proyek_view_form_penawaran" model="ir.ui.view">
+        <field name="name">hizwell.proyek.form.penawaran</field>
+        <field name="model">hizwell.proyek</field>
+        <field name="inherit_id" ref="hizwell_base.hizwell_proyek_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_lihat_penawaran" type="object" class="oe_stat_button" icon="fa-file-text-o"
+                        invisible="not id">
+                    <field name="jumlah_penawaran" widget="statinfo" string="Penawaran"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>
