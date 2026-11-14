@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hizwell_dokumen_user,Dokumen pengguna,model_hizwell_dokumen,hizwell_base.group_hizwell_user,1,1,1,1
+access_hizwell_jenis_user,Jenis dokumen pengguna,model_hizwell_jenis_dokumen,hizwell_base.group_hizwell_user,1,0,0,0
+access_hizwell_jenis_du,Jenis dokumen Direktur Utama,model_hizwell_jenis_dokumen,hizwell_base.group_direktur_utama,1,1,1,1
