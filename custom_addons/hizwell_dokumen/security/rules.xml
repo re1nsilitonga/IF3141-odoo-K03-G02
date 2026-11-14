@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rule_dokumen_baca" model="ir.rule">
+        <field name="name">Dokumen: Baca</field>
+        <field name="model_id" ref="model_hizwell_dokumen"/>
+        <field name="domain_force">['|', ('proyek_id.akses_ids', 'any', [('user_id', '=', user.id)]), ('pesanan_id.akses_ids', 'any', [('user_id', '=', user.id)])]</field>
+        <field name="groups" eval="[(4, ref('hizwell_base.group_hizwell_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="rule_dokumen_ubah" model="ir.rule">
+        <field name="name">Dokumen: Ubah</field>
+        <field name="model_id" ref="model_hizwell_dokumen"/>
+        <field name="domain_force">['|', ('proyek_id.akses_ids', 'any', [('user_id', '=', user.id), ('tingkat_akses', '=', 'ubah')]), ('pesanan_id.akses_ids', 'any', [('user_id', '=', user.id), ('tingkat_akses', '=', 'ubah')])]</field>
+        <field name="groups" eval="[(4, ref('hizwell_base.group_hizwell_user'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+    <record id="rule_dokumen_buat" model="ir.rule">
+        <field name="name">Dokumen: Buat</field>
+        <field name="model_id" ref="model_hizwell_dokumen"/>
+        <field name="domain_force">[(1, "=", 1)]</field>
+        <field name="groups" eval="[(4, ref('hizwell_base.group_hizwell_user'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="rule_dokumen_du" model="ir.rule">
+        <field name="name">Dokumen: Direktur Utama</field>
+        <field name="model_id" ref="model_hizwell_dokumen"/>
+        <field name="domain_force">[(1, "=", 1)]</field>
+        <field name="groups" eval="[(4, ref('hizwell_base.group_direktur_utama'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+</odoo>

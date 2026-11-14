@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="jenis_dokumen_view_tree" model="ir.ui.view">
+        <field name="name">hizwell.jenis.dokumen.tree</field>
+        <field name="model">hizwell.jenis.dokumen</field>
+        <field name="arch" type="xml"><tree><field name="name"/><field name="lingkup"/><field name="active"/></tree></field>
+    </record>
+    <record id="jenis_dokumen_view_form" model="ir.ui.view">
+        <field name="name">hizwell.jenis.dokumen.form</field>
+        <field name="model">hizwell.jenis.dokumen</field>
+        <field name="arch" type="xml"><form><sheet><group><field name="name"/><field name="lingkup"/><field name="active"/></group></sheet></form></field>
+    </record>
+    <record id="action_jenis_dokumen" model="ir.actions.act_window">
+        <field name="name">Jenis Dokumen</field><field name="res_model">hizwell.jenis.dokumen</field><field name="view_mode">tree,form</field>
+    </record>
+</odoo>

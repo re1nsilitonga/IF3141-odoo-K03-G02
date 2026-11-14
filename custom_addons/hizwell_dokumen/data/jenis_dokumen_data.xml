@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="jenis_tender" model="hizwell.jenis.dokumen"><field name="name">Dokumen Tender</field><field name="lingkup">proyek</field></record>
+    <record id="jenis_oa" model="hizwell.jenis.dokumen"><field name="name">OA</field><field name="lingkup">pesanan</field></record>
+    <record id="jenis_proforma" model="hizwell.jenis.dokumen"><field name="name">Proforma Invoice</field><field name="lingkup">pesanan</field></record>
+    <record id="jenis_invoice" model="hizwell.jenis.dokumen"><field name="name">Invoice</field><field name="lingkup">pesanan</field></record>
+    <record id="jenis_packing" model="hizwell.jenis.dokumen"><field name="name">Packing List</field><field name="lingkup">pesanan</field></record>
+    <record id="jenis_bol" model="hizwell.jenis.dokumen"><field name="name">Bill of Lading</field><field name="lingkup">pesanan</field></record>
+    <record id="jenis_pib" model="hizwell.jenis.dokumen"><field name="name">PIB</field><field name="lingkup">pesanan</field></record>
+    <record id="jenis_bst" model="hizwell.jenis.dokumen"><field name="name">BST</field><field name="lingkup">pesanan</field></record>
+</odoo>

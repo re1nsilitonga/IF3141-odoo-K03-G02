@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_dokumen" name="Dokumen" parent="hizwell_base.menu_hizwell_root" action="action_dokumen" groups="hizwell_base.group_hizwell_user" sequence="30"/>
+    <menuitem id="menu_jenis_dokumen" name="Jenis Dokumen" parent="hizwell_base.menu_hizwell_konfigurasi" action="action_jenis_dokumen" groups="hizwell_base.group_direktur_utama" sequence="30"/>
+</odoo>
