@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hizwell_status_dokumen_user,hizwell.status.dokumen user,model_hizwell_status_dokumen,hizwell_base.group_hizwell_user,1,0,0,0
+access_hizwell_status_dokumen_admin,hizwell.status.dokumen admin,model_hizwell_status_dokumen,hizwell_base.group_staf_administrasi,1,1,1,0
+access_hizwell_status_dokumen_du,hizwell.status.dokumen direktur utama,model_hizwell_status_dokumen,hizwell_base.group_direktur_utama,1,1,1,1
+access_hizwell_daftar_periksa_user,hizwell.daftar.periksa user,model_hizwell_daftar_periksa,hizwell_base.group_hizwell_user,1,0,0,0
+access_hizwell_daftar_periksa_sales,hizwell.daftar.periksa sales,model_hizwell_daftar_periksa,hizwell_base.group_staf_sales,1,1,1,0
+access_hizwell_daftar_periksa_du,hizwell.daftar.periksa direktur utama,model_hizwell_daftar_periksa,hizwell_base.group_direktur_utama,1,1,1,1
+access_hizwell_daftar_periksa_baris_user,hizwell.daftar.periksa.baris user,model_hizwell_daftar_periksa_baris,hizwell_base.group_hizwell_user,1,0,0,0
+access_hizwell_daftar_periksa_baris_sales,hizwell.daftar.periksa.baris sales,model_hizwell_daftar_periksa_baris,hizwell_base.group_staf_sales,1,1,1,1
+access_hizwell_daftar_periksa_baris_du,hizwell.daftar.periksa.baris direktur utama,model_hizwell_daftar_periksa_baris,hizwell_base.group_direktur_utama,1,1,1,1

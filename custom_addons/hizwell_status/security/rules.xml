@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Status dokumen pesanan -->
+    <record id="rule_status_dokumen_baca" model="ir.rule">
+        <field name="name">Status Dokumen: baca sesuai hak akses</field>
+        <field name="model_id" ref="model_hizwell_status_dokumen"/>
+        <field name="domain_force">[('pesanan_id.akses_ids', 'any', [('user_id', '=', user.id)])]</field>
+        <field name="groups" eval="[(4, ref('hizwell_base.group_hizwell_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="rule_status_dokumen_ubah" model="ir.rule">
+        <field name="name">Status Dokumen: ubah jika akses Mengubah</field>
+        <field name="model_id" ref="model_hizwell_status_dokumen"/>
+        <field name="domain_force">[('pesanan_id.akses_ids', 'any', [('user_id', '=', user.id), ('tingkat_akses', '=', 'ubah')])]</field>
+        <field name="groups" eval="[(4, ref('hizwell_base.group_hizwell_user'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+    <record id="rule_status_dokumen_du" model="ir.rule">
+        <field name="name">Status Dokumen: Direktur Utama semua</field>
+        <field name="model_id" ref="model_hizwell_status_dokumen"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('hizwell_base.group_direktur_utama'))]"/>
+    </record>
+    <record id="rule_daftar_periksa_baca" model="ir.rule">
+        <field name="name">Daftar Periksa: baca sesuai hak akses</field>
+        <field name="model_id" ref="model_hizwell_daftar_periksa"/>
+        <field name="domain_force">[('proyek_id.akses_ids', 'any', [('user_id', '=', user.id)])]</field>
+        <field name="groups" eval="[(4, ref('hizwell_base.group_hizwell_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="rule_daftar_periksa_ubah" model="ir.rule">
+        <field name="name">Daftar Periksa: ubah jika akses Mengubah</field>
+        <field name="model_id" ref="model_hizwell_daftar_periksa"/>
+        <field name="domain_force">[('proyek_id.akses_ids', 'any', [('user_id', '=', user.id), ('tingkat_akses', '=', 'ubah')])]</field>
+        <field name="groups" eval="[(4, ref('hizwell_base.group_hizwell_user'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+    <record id="rule_daftar_periksa_du" model="ir.rule">
+        <field name="name">Daftar Periksa: Direktur Utama semua</field>
+        <field name="model_id" ref="model_hizwell_daftar_periksa"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('hizwell_base.group_direktur_utama'))]"/>
+    </record>
+        <record id="rule_daftar_periksa_baris_baca" model="ir.rule">
+        <field name="name">Baris Daftar Periksa: baca sesuai hak akses</field>
+        <field name="model_id" ref="model_hizwell_daftar_periksa_baris"/>
+        <field name="domain_force">[('daftar_id.proyek_id.akses_ids', 'any', [('user_id', '=', user.id)])]</field>
+        <field name="groups" eval="[(4, ref('hizwell_base.group_hizwell_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="rule_daftar_periksa_baris_ubah" model="ir.rule">
+        <field name="name">Baris Daftar Periksa: ubah jika akses Mengubah</field>
+        <field name="model_id" ref="model_hizwell_daftar_periksa_baris"/>
+        <field name="domain_force">[('daftar_id.proyek_id.akses_ids', 'any', [('user_id', '=', user.id), ('tingkat_akses', '=', 'ubah')])]</field>
+        <field name="groups" eval="[(4, ref('hizwell_base.group_hizwell_user'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+    <record id="rule_daftar_periksa_baris_du" model="ir.rule">
+        <field name="name">Baris Daftar Periksa: Direktur Utama semua</field>
+        <field name="model_id" ref="model_hizwell_daftar_periksa_baris"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('hizwell_base.group_direktur_utama'))]"/>
+    </record>
+</odoo>

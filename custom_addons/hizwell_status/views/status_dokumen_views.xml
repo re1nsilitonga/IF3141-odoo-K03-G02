@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hizwell_status_dokumen_view_tree" model="ir.ui.view">
+        <field name="name">hizwell.status.dokumen.tree</field>
+        <field name="model">hizwell.status.dokumen</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom" create="0" delete="0">
+                <field name="pesanan_id" readonly="1"/>
+                <field name="jenis_dokumen" readonly="1"/>
+                <field name="status"/>
+                <field name="tanggal_pembaruan"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hizwell_status_dokumen_view_search" model="ir.ui.view">
+        <field name="name">hizwell.status.dokumen.search</field>
+        <field name="model">hizwell.status.dokumen</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="pesanan_id"/>
+                <field name="jenis_dokumen"/>
+                <filter name="filter_belum_ada" string="Belum Ada" domain="[('status', '=', 'belum_ada')]"/>
+                <group expand="0" string="Kelompokkan">
+                    <filter name="group_pesanan" string="Pesanan" context="{'group_by': 'pesanan_id'}"/>
+                    <filter name="group_jenis" string="Jenis Dokumen" context="{'group_by': 'jenis_dokumen'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="hizwell_status_dokumen_action" model="ir.actions.act_window">
+        <field name="name">Status Dokumen Pesanan</field>
+        <field name="res_model">hizwell.status.dokumen</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!-- FR-08: rekap per pesanan, dibaca Direktur Utama dan Direktur Wilayah -->
+    <record id="hizwell_laporan_status_view_tree" model="ir.ui.view">
+        <field name="name">hizwell.pesanan.laporan.status.tree</field>
+        <field name="model">hizwell.pesanan</field>
+        <field name="arch" type="xml">
+            <tree create="0" delete="0" default_order="jumlah_belum_lengkap desc"
+                  decoration-danger="jumlah_belum_lengkap > 0"
+                  decoration-success="jumlah_belum_lengkap == 0">
+                <field name="name"/>
+                <field name="proyek_id"/>
+                <field name="vendor_id"/>
+                <field name="jumlah_belum_lengkap"/>
+                <field name="dokumen_belum_lengkap"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hizwell_laporan_status_action" model="ir.actions.act_window">
+        <field name="name">Laporan Status Dokumen</field>
+        <field name="res_model">hizwell.pesanan</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="hizwell_laporan_status_view_tree"/>
+    </record>
+</odoo>

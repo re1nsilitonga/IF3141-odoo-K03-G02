@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_hizwell_status" name="Status Dokumen"
+              parent="hizwell_base.menu_hizwell_root" sequence="40"/>
+    <menuitem id="menu_hizwell_daftar_periksa" name="Daftar Periksa Tender" parent="menu_hizwell_status"
+              action="hizwell_daftar_periksa_action" sequence="10"/>
+    <menuitem id="menu_hizwell_status_dokumen" name="Status Dokumen Pesanan" parent="menu_hizwell_status"
+              action="hizwell_status_dokumen_action" sequence="20"/>
+    <menuitem id="menu_hizwell_laporan_status" name="Laporan Status Dokumen" parent="menu_hizwell_status"
+              action="hizwell_laporan_status_action" sequence="30"/>
+</odoo>

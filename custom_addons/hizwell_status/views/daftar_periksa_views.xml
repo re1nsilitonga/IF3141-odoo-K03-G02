@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hizwell_daftar_periksa_view_tree" model="ir.ui.view">
+        <field name="name">hizwell.daftar.periksa.tree</field>
+        <field name="model">hizwell.daftar.periksa</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="proyek_id"/>
+                <field name="state"/>
+                <field name="jumlah_belum"/>
+                <field name="diverifikasi_oleh"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hizwell_daftar_periksa_view_form" model="ir.ui.view">
+        <field name="name">hizwell.daftar.periksa.form</field>
+        <field name="model">hizwell.daftar.periksa</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_verifikasi" type="object" string="Verifikasi" class="btn-primary"
+                            groups="hizwell_base.group_direktur_wilayah" invisible="state == 'diverifikasi'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="proyek_id" readonly="id"/>
+                            <field name="jumlah_belum"/>
+                        </group>
+                        <group>
+                            <field name="diverifikasi_oleh"/>
+                            <field name="tanggal_verifikasi"/>
+                        </group>
+                    </group>
+                    <field name="baris_ids">
+                        <tree editable="bottom">
+                            <field name="name" readonly="parent.state == 'diverifikasi'"/>
+                            <field name="tersedia"/>
+                            <field name="catatan"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hizwell_daftar_periksa_view_search" model="ir.ui.view">
+        <field name="name">hizwell.daftar.periksa.search</field>
+        <field name="model">hizwell.daftar.periksa</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="proyek_id"/>
+                <filter name="filter_belum_lengkap" string="Belum Lengkap" domain="[('jumlah_belum', '>', 0)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="hizwell_daftar_periksa_action" model="ir.actions.act_window">
+        <field name="name">Daftar Periksa Tender</field>
+        <field name="res_model">hizwell.daftar.periksa</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Buat daftar periksa dokumen tender pertama</p>
+        </field>
+    </record>
+</odoo>
